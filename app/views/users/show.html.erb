@@ -1,5 +1,10 @@
 <h1>マイページ</h1>
+<p><%= image_tag @user.get_profile_image(100,100) %></p>
 <p><%= @user.name %></p>
 <p><%= @user.email_address %></p>
+<p><%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-primary" %></p>
 <h3>参加コミュニティ一覧</h3>
 <h3>いいね一覧</h3>
+
+<%= link_to "退会する", user_path(Current.user),
+  data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
