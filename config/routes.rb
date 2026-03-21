@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  resources :users, only: [:new, :create, :show, :edit, :update, :destroy], path_names: { new: 'sign_up' }
+  get "mypage", to: "users#show"
+
+  resource :session
+  resources :passwords, param: :token
+
+  root "homes#top"
+  get "about", to: "homes#about"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -12,8 +21,4 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  root "homes#top"
-  get "about", to: "homes#about"
-
-  
 end
