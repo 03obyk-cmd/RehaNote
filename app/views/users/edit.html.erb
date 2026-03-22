@@ -13,7 +13,7 @@
 
   <div>
     <%= f.label :profile_image %><br>
-    <%= f.file_field :profile_image %>
+    <%= f.file_field :profile_image, accept: "image/*" %>
   </div>
 
   <%= f.submit "保存" %>
