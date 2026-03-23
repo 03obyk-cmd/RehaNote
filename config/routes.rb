@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :communities
+
   resources :users, path_names: { new: 'sign_up' }
   get "mypage", to: "users#mypage"
 

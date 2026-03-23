@@ -1,0 +1,12 @@
+<h1>新規運動分類作成</h1>
+
+<%= form_with model: @community do |f| %>
+  <h5>運動分類</h5>
+  <%= f.text_field :name %>
+
+  <h5>説明文</h5>
+  <%= f.text_area :body %>
+
+  <br>
+  <%= f.submit '作成' %>
+<% end %>
