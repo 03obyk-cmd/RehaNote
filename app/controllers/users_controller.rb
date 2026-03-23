@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [:new, :create] 
- 
+  allow_unauthenticated_access only: [:new, :create]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def new
     @user = User.new
   end
@@ -17,24 +18,27 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+  end
+
+  def mypage
     @user = Current.user
+    render :show
   end
 
   def edit
-    @user = Current.user
   end
 
   def update
-    @user = Current.user
     if @user.update(user_params)
       redirect_to mypage_path(@user), notice: "更新しました。"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    Current.user.destroy
+    @user.destroy
     reset_session
     redirect_to root_path, notice: "退会しました。"
   end
@@ -43,5 +47,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :profile_image)
+  end
+
+  def correct_user
+    @user = User.find_by_id(params[:id])
+    redirect_to root_path if Current.user != @user
   end
 end

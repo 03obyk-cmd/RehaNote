@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :users, only: [:new, :create, :show, :edit, :update, :destroy], path_names: { new: 'sign_up' }
-  get "mypage", to: "users#show"
+  resources :users, path_names: { new: 'sign_up' }
+  get "mypage", to: "users#mypage"
 
   resource :session
   resources :passwords, param: :token
