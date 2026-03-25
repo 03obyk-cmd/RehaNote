@@ -6,7 +6,9 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  has_many :communities, dependent: :destroy
+  has_many :communities, through: :community_users
+  has_many :community_users, dependent: :destroy
+
 
   validates :name, presence: true
   validates :email_address, presence: true
