@@ -1,2 +1,14 @@
-<h1>Communities#edit</h1>
-<p>Find me in app/views/communities/edit.html.erb</p>
+<h1>編集</h1>
+
+<%= form_with model: @community do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+
+  <h5>運動分類</h5>
+  <%= f.text_field :name %>
+
+  <h5>説明文</h5>
+  <%= f.text_area :body %>
+
+  <br>
+  <%= f.submit '変更保存' %>
+<% end %>

@@ -7,3 +7,6 @@ ja:
         password: パスワード
         password_confirmation: パスワードの確認
         profile_image: プロフィール画像
+      community:
+        name: 運動分類
+        body: 説明文

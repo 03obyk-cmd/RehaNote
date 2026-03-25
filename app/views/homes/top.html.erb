@@ -2,3 +2,9 @@
 <p>リハビリ・介護職のためのコミュニティサイト</p>
 
 <h2>コミュニティ一覧</h2>
+
+<% @communities.each do |community| %>
+
+  <h4><%= link_to community.name, community_path(community) %></h4>
+
+<% end %>
