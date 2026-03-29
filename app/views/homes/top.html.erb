@@ -1,10 +1,37 @@
 <h1>RehaNote</h1>
 <p>リハビリ・介護職のためのコミュニティサイト</p>
 
-<h2>コミュニティ一覧</h2>
 
-<% @communities.each do |community| %>
+<div class="container mt-4">
+  <div class="row">
+    <% @communities.each do |community| %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <%= link_to community_path(community), class: "text-decoration-none text-dark" do %>
+          <div class="card community-card h-100">
+            <div class="card-body">
 
-  <h4><%= link_to community.name, community_path(community) %></h4>
+              <h5 class="card-title fw-bold">
+                <%= community.name %>
+              </h5>
 
-<% end %>
+              <p class="card-text text-muted">
+                <%= community.body %>
+              </p>
+
+              <% if Current.user %>
+                <% cu = community.community_users.find_by(user: Current.user) %>
+
+                <% if cu&.approved? %>
+                  <span class="badge bg-success">参加中</span>
+                <% elsif cu&.pending? %>
+                  <span class="badge bg-warning text-dark">承認待ち</span>
+                <% end %>
+              <% end %>
+
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

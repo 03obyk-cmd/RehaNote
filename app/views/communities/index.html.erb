@@ -1,9 +1,13 @@
-<h1>運動分類一覧</h1>
+<h1>コミュニティ一覧</h1>
 
-<% @communities.each do |community| %>
-
-  <span>
-    <%= link_to community.name, community_path(community.id) %>
-  </span>
-  
-<% end %>
+<div class="container">
+  <div class="row">
+    <% @communities.each do |community| %>
+      <div class="col-12 mb-3">
+        <%= link_to community_path(community) , class: "btn btn-lg btn-outline-primary w-100 p-4" do %>
+          <h4><%= community.name %></h4>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

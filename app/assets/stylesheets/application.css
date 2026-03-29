@@ -8,3 +8,28 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ .community-card {
+  border-radius: 16px;
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+}
+
+.community-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card-title {
+  font-size: 1.2rem;
+}
+
+.card-text {
+  font-size: 0.9rem;
+}
+
+.profile-card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}

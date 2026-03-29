@@ -1,9 +1,46 @@
-<h1>マイページ</h1>
-<p><%= image_tag @user.get_profile_image(100,100) %></p>
-<p><%= @user.name %></p>
-<p><%= @user.email_address %></p>
-<p><%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-primary" %></p>
-<h3>参加コミュニティ一覧</h3>
+<div class="container mt-4">
+  <div class="card profile-card mb-4">
+    <div class="card-body text-center">
+
+      <%= image_tag @user.get_profile_image(100,100) %>
+
+      <h4 class="fw-bold"><%= @user.name %></h4>
+      <p class="text-muted"><%= @user.email_address %></p>
+
+      <%= link_to "編集",
+          edit_user_path(@user),
+          class: "btn btn-outline-primary btn-sm" %>
+
+    </div>
+  </div>
+</div>
+
+<h5 class="mb-3">参加中コミュニティ</h5>
+<div class="row">
+  <% Current.user.community_users.where(status: :approved).map(&:community).each do |community| %>
+    <div class="col-md-6 col-lg-4 mb-3">
+
+      <%= link_to community_path(community), class: "text-decoration-none text-dark" do %>
+
+        <div class="card community-card h-100">
+          <div class="card-body">
+            <h6 class="fw-bold"><%= community.name %></h6>
+
+            <p class="text-muted small">
+              <%= community.body %>
+            </p>
+
+            <span class="badge bg-success">参加中</span>
+          </div>
+        </div>
+
+      <% end %>
+
+    </div>
+  <% end %>
+</div>
+
+
 <h3>いいね一覧</h3>
 
 <%= link_to "退会する", user_path(Current.user),
