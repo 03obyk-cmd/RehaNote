@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :communities
+  resources :community_users, only: [:update]
+
+  resources :communities do
+    resources :community_users, only: [:create, :update, :destroy]
+    get "members", on: :member
+  end
 
   resources :users, path_names: { new: 'sign_up' }
   get "mypage", to: "users#mypage"

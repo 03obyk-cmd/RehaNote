@@ -1,4 +1,7 @@
 <h2><%= @community.name %></h2>
+<% if @community.user == Current.user %>
+  <p>※あなたはこのコミュニティの管理者です。</p>
+<% end %>
 
 <p><%= @community.body %></p>
 
@@ -6,3 +9,29 @@
   <%= link_to "編集", edit_community_path(@community), class: "btn btn-outline-primary" %>
   <%= link_to "削除", community_path(@community), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
 <% end %>
+
+<% if Current.user && @community.user != Current.user %>
+  <% community_user = @community.community_users.find_by(user: Current.user) %>
+  <% if community_user.nil? %>
+    <%= link_to "参加申請",
+        community_community_users_path(@community), data: { turbo_method: :post },
+        class: "btn btn-outline-primary" %>
+
+  <% elsif community_user.pending? %>
+    <p>承認待ちです</p>
+
+  <% elsif community_user.approved? %>
+    <%= link_to "退会",
+        community_community_user_path(@community, community_user), data: { turbo_method: :delete },
+        class: "btn btn-outline-danger" %>
+
+  <% elsif community_user.rejected? %>
+    <p>参加拒否されました</p>
+
+  <% end %>
+
+<% end %>
+
+<%= link_to "メンバー一覧",
+    members_community_path(@community),
+    class: "btn btn-outline-secondary" %>

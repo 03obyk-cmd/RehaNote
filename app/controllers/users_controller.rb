@@ -12,7 +12,6 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to mypage_path, notice: "ユーザー登録が完了しました。"
     else
-      # エラー時はフォームを再表示
       render :new, status: :unprocessable_entity
     end
   end

@@ -1,0 +1,26 @@
+<h2>メンバー一覧</h2>
+
+<% @community.community_users.each do |cu| %>
+
+  <% if cu.approved? %>
+    <p><%= cu.user.name %>（参加中）</p>
+
+  <% elsif @community.user == Current.user %>
+
+    <p><%= cu.user.name %>（<%= I18n.t("enums.community_user.status.#{cu.status}") %>）</p>
+
+    <% if cu.pending? %>
+      <%= link_to "承認",
+          community_user_path(cu, status: "approved"),
+          data: { turbo_method: :patch },
+          class: "btn btn-outline-success" %>
+
+      <%= link_to "拒否",
+          community_user_path(cu, status: "rejected"),
+          data: { turbo_method: :patch },
+          class: "btn btn-outline-danger" %>
+    <% end %>
+
+  <% end %>
+
+<% end %>

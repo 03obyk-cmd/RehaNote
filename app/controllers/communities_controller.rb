@@ -9,6 +9,7 @@ class CommunitiesController < ApplicationController
     @community = Community.new(community_params)
     @community.user = Current.user
     if @community.save
+      CommunityUser.create!(user: Current.user, community: @community, status: :approved)
       redirect_to community_path(@community)
     else
       render :new, status: :unprocessable_entity
@@ -21,6 +22,7 @@ class CommunitiesController < ApplicationController
 
   def show
     @community = Community.find(params[:id])
+    @community_users = @community.community_users
   end
 
   def edit
@@ -40,6 +42,11 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
     @community.destroy
     redirect_to communities_path,  notice: "削除しました。"
+  end
+
+  def members
+    @community = Community.find(params[:id])
+    @community_users = @community.community_users.includes(:user)
   end
 
   private

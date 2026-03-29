@@ -10,3 +10,10 @@ ja:
       community:
         name: 運動分類
         body: 説明文
+  
+  enums:
+    community_user:
+      status:
+        pending: "承認待ち"
+        approved: "参加中"
+        rejected: "拒否"
