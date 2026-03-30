@@ -1,22 +1,29 @@
-<h1>プロフィール編集</h1>
+<div class="container mt-5" style="max-width: 400px;">
+  <div class="card form-card">
+    <div class="card-body">
 
-<%= form_with model: @user do |f| %>
-  <%= render 'layouts/error_messages', model: f.object %>
-  
-  <div>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+      <h3 class="text-center mb-4">プロフィール編集</h3>
+
+      <%= form_with model: @user do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+
+        <div class="mb-3">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+
+          <%= f.label :email_address %>
+          <%= f.text_field :email_address, class: "form-control" %>
+
+          <%= f.label :profile_image %>
+          <%= f.file_field :profile_image, accept: "image/*", class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.submit "保存", class: "btn btn-outline-primary btn-hover" %>
+        </div>
+
+      <% end %>
+
+    </div>
   </div>
-
-  <div>
-    <%= f.label :email_address %><br>
-    <%= f.text_field :email_address %>
-  </div>
-
-  <div>
-    <%= f.label :profile_image %><br>
-    <%= f.file_field :profile_image, accept: "image/*" %>
-  </div>
-
-  <%= f.submit "保存", class: "btn btn-outline-primary btn-hover" %>
-<% end %>
+</div>

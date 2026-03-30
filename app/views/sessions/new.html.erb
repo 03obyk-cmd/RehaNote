@@ -1,14 +1,27 @@
-<h2>ログイン</h2>
+<div class="container mt-5" style="max-width: 400px;">
+  <div class="card form-card">
+    <div class="card-body">
 
-<%= form_with url: session_path do |form| %>
+      <h3 class="text-center mb-4">ログイン</h3>
 
-  <h5>メールアドレス</h5>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", value: params[:email_address] %>
+      <%= form_with url: session_path do |form| %>
 
-  <h5>パスワード</h5>
-  <%= form.password_field :password, required: true, autocomplete: "current-password" %>
-  <br>
-  <%= form.submit "ログイン", class: "btn btn-outline-primary btn-hover" %>
-<% end %>
+        <div class="mb-3">
+          <%= form.label "メールアドレス" %>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", value: params[:email_address], class: "form-control" %>
 
-<%= link_to "パスワードを忘れた場合", new_password_path %>
+          <%= form.label "パスワード" %>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.submit "ログイン", class: "btn btn-outline-primary btn-hover" %>
+        </div>
+
+      <% end %>
+
+      <%= link_to "パスワードを忘れた場合", new_password_path %>
+
+    </div>
+  </div>
+</div>

@@ -18,6 +18,12 @@
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
+.form-card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
  .community-card {
   border-radius: 16px;
   transition: all 0.2s ease;
@@ -27,6 +33,11 @@
 .community-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.community-card-nonhover {
+  border-radius: 16px;
+  border: 1px solid #eee;
 }
 
 .card-title {

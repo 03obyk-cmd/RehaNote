@@ -1,37 +1,48 @@
-<h2><%= @community.name %></h2>
-<% if @community.user == Current.user %>
-  <p>※あなたはこのコミュニティの管理者です。</p>
-<% end %>
+<div class="container mt-4">
 
-<p><%= @community.body %></p>
+  <!-- タイトルカード -->
+  <div class="card community-card-nonhover mb-4">
+    <div class="card-body">
 
-<% if @community.user == Current.user %>
-  <%= link_to "編集", edit_community_path(@community), class: "btn btn-outline-primary btn-hover" %>
-  <%= link_to "削除", community_path(@community), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-hover" %>
-<% end %>
+      <div class="d-flex align-items-center gap-2">
+        <h3 class="fw-bold mb-3"><%= @community.name %></h3>
+        <% if @community.user == Current.user %>
+          <span class="badge bg-primary">管理者</span>
+        <% end %>
+      </div>
+        
+      <p class="text-muted"><%= @community.body %></p>
 
-<% if Current.user && @community.user != Current.user %>
-  <% community_user = @community.community_users.find_by(user: Current.user) %>
-  <% if community_user.nil? %>
-    <%= link_to "参加申請",
-        community_community_users_path(@community), data: { turbo_method: :post },
-        class: "btn btn-outline-primary btn-hover" %>
+    </div>
+  </div>
 
-  <% elsif community_user.pending? %>
-    <p>承認待ちです</p>
+  <!-- ボタンエリア -->
+  <div class="mb-3">
+    <% if @community.user == Current.user %>
+      <%= link_to "編集", edit_community_path(@community), class: "btn btn-outline-primary btn-hover" %>
+      <%= link_to "削除", community_path(@community), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-hover" %>
+    <% end %>
 
-  <% elsif community_user.approved? %>
-    <%= link_to "退会",
-        community_community_user_path(@community, community_user), data: { turbo_method: :delete },
-        class: "btn btn-outline-danger btn-hover" %>
+    <% if Current.user && @community.user != Current.user %>
+      <% community_user = @community.community_users.find_by(user: Current.user) %>
+      <% if community_user.nil? %>
+        <%= link_to "参加申請",community_community_users_path(@community), data: { turbo_method: :post }, class: "btn btn-outline-primary btn-hover" %>
 
-  <% elsif community_user.rejected? %>
-    <p>参加拒否されました</p>
+        <% elsif community_user.pending? %>
+          <p>承認待ちです</p>
 
-  <% end %>
+        <% elsif community_user.approved? %>
+          <%= link_to "退会", community_community_user_path(@community, community_user), data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-hover" %>
 
-<% end %>
+        <% elsif community_user.rejected? %>
+          <p>参加拒否されました</p>
 
-<%= link_to "メンバー一覧",
-    members_community_path(@community),
-    class: "btn btn-outline-secondary btn-hover" %>
+      <% end %>
+
+    <% end %>
+  </div>
+
+  <!-- メンバー一覧 -->
+  <%= link_to "メンバーを見る", members_community_path(@community), class: "btn btn-outline-secondary btn-hover" %>
+
+</div>

@@ -1,11 +1,33 @@
-<h1>コミュニティ一覧</h1>
+<h3 class="mb-4">コミュニティ一覧</h3>
 
-<div class="container">
+<div class="container mt-4">
   <div class="row">
     <% @communities.each do |community| %>
-      <div class="col-12 mb-3">
-        <%= link_to community_path(community) , class: "btn btn-lg btn-outline-primary w-100 p-4" do %>
-          <h4><%= community.name %></h4>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <%= link_to community_path(community), class: "text-decoration-none text-dark" do %>
+          <div class="card community-card h-100">
+            <div class="card-body">
+
+              <h5 class="card-title fw-bold">
+                <%= community.name %>
+              </h5>
+
+              <p class="card-text text-muted">
+                <%= community.body %>
+              </p>
+
+              <% if Current.user %>
+                <% cu = community.community_users.find_by(user: Current.user) %>
+
+                <% if cu&.approved? %>
+                  <span class="badge bg-success">参加中</span>
+                <% elsif cu&.pending? %>
+                  <span class="badge bg-warning text-dark">承認待ち</span>
+                <% end %>
+              <% end %>
+
+            </div>
+          </div>
         <% end %>
       </div>
     <% end %>
