@@ -13,12 +13,12 @@
       <%= link_to "承認",
           community_user_path(cu, status: "approved"),
           data: { turbo_method: :patch },
-          class: "btn btn-outline-success" %>
+          class: "btn btn-outline-success btn-hover" %>
 
       <%= link_to "拒否",
           community_user_path(cu, status: "rejected"),
           data: { turbo_method: :patch },
-          class: "btn btn-outline-danger" %>
+          class: "btn btn-outline-danger btn-hover" %>
     <% end %>
 
   <% end %>

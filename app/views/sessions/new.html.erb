@@ -8,7 +8,7 @@
   <h5>パスワード</h5>
   <%= form.password_field :password, required: true, autocomplete: "current-password" %>
   <br>
-  <%= form.submit "ログイン" %>
+  <%= form.submit "ログイン", class: "btn btn-outline-primary btn-hover" %>
 <% end %>
 
 <%= link_to "パスワードを忘れた場合", new_password_path %>
