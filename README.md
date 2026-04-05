@@ -30,4 +30,5 @@
 - IDE：Visual Studio Code（VSCode）
 ​
 ## 使用素材
-フリーイラスト素材として以下を使用（後ほど追記予定）
+フリーイラスト素材として以下を使用
+* Font Awesome（https://fontawesome.com/）
