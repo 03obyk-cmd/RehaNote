@@ -10,6 +10,11 @@ ja:
       community:
         name: 運動分類
         body: 説明文
+      post:
+        title: 運動名
+        start_position: 開始姿勢
+        exercise_description: 運動詳細
+        record_example: 記録文例
   
   enums:
     community_user:
@@ -17,3 +22,8 @@ ja:
         pending: "承認待ち"
         approved: "参加中"
         rejected: "拒否"
+    post:
+      start_position:
+        lying: "臥位"
+        sitting: "座位"
+        standing: "立位"

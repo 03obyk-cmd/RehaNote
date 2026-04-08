@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :community_users, only: [:update]
 
   resources :communities do
+    resources :posts
     resources :community_users, only: [:create, :update, :destroy]
     get "members", on: :member
   end

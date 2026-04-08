@@ -23,6 +23,7 @@ class CommunitiesController < ApplicationController
   def show
     @community = Community.find(params[:id])
     @community_users = @community.community_users
+    @post = Post.new
   end
 
   def edit

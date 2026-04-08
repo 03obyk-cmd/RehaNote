@@ -1,6 +1,6 @@
 <div class="container mt-4">
 
-  <!-- タイトルカード -->
+  <!-- コミュニティ詳細エリア -->
   <div class="card community-card-nonhover mb-4">
     <div class="card-body">
 
@@ -42,7 +42,33 @@
     <% end %>
   </div>
 
-  <!-- メンバー一覧 -->
-  <%= link_to "メンバーを見る", members_community_path(@community), class: "btn btn-outline-secondary btn-hover" %>
+  <%= link_to "参加者一覧", members_community_path(@community), class: "btn btn-outline-secondary btn-hover" %>
+
+  <!-- 投稿エリア -->
+  <div class="row">
+    <% @community.posts.each do |post| %>
+      <div class="col-md-4 mb-4">
+        <%= link_to community_post_path(@community, post), class: "text-decoration-none text-dark" do %>
+          <div class="card h-100 post-card">
+            <div class="card-body d-flex flex-column">
+
+              <div class="d-flex align-items-center gap-2">
+                <h5 class="card-title"><%= post.title %></h5>
+                <span class="badge bg-secondary mb-2">
+                  <%= I18n.t("enums.post.start_position.#{post.start_position}") %>
+                </span>
+              </div>
+
+              <p class="card-text">
+                <%= truncate(post.exercise_description, length: 50) %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "投稿する", new_community_post_path(@community), class: "btn btn-outline-primary btn-hover" %>
 
 </div>

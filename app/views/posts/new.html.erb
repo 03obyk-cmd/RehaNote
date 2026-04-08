@@ -1,0 +1,38 @@
+<div class="container mt-5" style="max-width: 500px;">
+  <div class="card form-card">
+    <div class="card-body">
+
+      <h3 class="text-center mb-4">新規投稿</h3>
+
+      <%= form_with model: [@community, @post] do |f| %>
+
+        <%= render 'layouts/error_messages', model: f.object %>
+
+        <div class="mb-3">
+          <%= f.label "運動名" %>
+          <%= f.text_field :title, class: "form-control" %>
+
+          <%= f.label "開始姿勢" %><br>
+          <% Post.start_positions.keys.each do |k| %>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :start_position, k, class: "form-check-input" %>
+              <%= f.label :start_position, I18n.t("enums.post.start_position.#{k}"), value: k, class: "form-check-label" %>
+            </div>
+          <% end %><br>
+
+          <%= f.label "運動詳細" %>
+          <%= f.text_area :exercise_description, class: "form-control" %>
+
+          <%= f.label "記録文例" %>
+          <%= f.text_area :record_example, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.submit '投稿', class: "btn btn-outline-primary btn-hover" %>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

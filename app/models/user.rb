@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_many :communities, through: :community_users
   has_many :community_users, dependent: :destroy
-
+  has_many :posts
 
   validates :name, presence: true
   validates :email_address, presence: true

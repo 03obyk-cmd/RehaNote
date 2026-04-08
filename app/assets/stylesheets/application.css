@@ -38,6 +38,7 @@
 .community-card-nonhover {
   border-radius: 16px;
   border: 1px solid #eee;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .card-title {
@@ -52,4 +53,13 @@
   border-radius: 16px;
   border: none;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.post-card {
+  transition: 0.3s;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }

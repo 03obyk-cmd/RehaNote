@@ -1,0 +1,50 @@
+<div class="container mt-5" style="max-width: 700px;">
+  <div class="card mb-4">
+    <div class="card-body">
+
+      <h3><%= @post.title %></h3>
+
+      <span class="badge bg-secondary mb-2">
+        <%= I18n.t("enums.post.start_position.#{@post.start_position}") %>
+      </span>
+
+      <%= simple_format(@post.exercise_description) %>
+
+      <hr>
+
+      <p class="text-muted"><%= simple_format(@post.record_example) %></p>
+
+      <% if @post.user == Current.user %>
+        <%= link_to "編集",
+            edit_community_post_path(@post.community, @post),
+            class: "btn btn-outline-primary btn-sm btn-hover" %>
+
+        <%= link_to "削除",
+            community_post_path(@post.community, @post),
+            data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
+            class: "btn btn-outline-danger btn-sm btn-hover" %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <!-- いいね（仮） -->
+  <div class="mb-4">
+    <button class="btn btn-outline-danger">♥ いいね</button>
+  </div>
+
+  <!-- コメント一覧（仮） -->
+  <div class="mb-4">
+    <h5>コメント</h5>
+  </div>
+
+  <!-- コメントフォーム（仮） -->
+  <div class="card">
+    <div class="card-body">
+      <h6>コメントを書く</h6>
+      <textarea class="form-control mb-2"></textarea>
+      <button class="btn btn-outline-primary">送信</button>
+    </div>
+  </div>
+
+</div>
