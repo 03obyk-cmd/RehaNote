@@ -24,6 +24,10 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
     @community_users = @community.community_users
     @post = Post.new
+
+    @posts = @community.posts
+    @posts = @posts.where("title LIKE :q OR exercise_description LIKE :q", q: "%#{params[:keyword]}%") if params[:keyword].present?
+    @posts = @posts.where(start_position: params[:start_position]) if params[:start_position].present?
   end
 
   def edit

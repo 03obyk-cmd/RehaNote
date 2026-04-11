@@ -5,17 +5,19 @@
       <%= image_tag @user.get_profile_image(100,100) %>
 
       <h4 class="fw-bold"><%= @user.name %></h4>
-      <p class="text-muted"><%= @user.email_address %></p>
 
-      <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-primary btn-hover" %>
+      <% if @user == Current.user %>
+        <p class="text-muted"><%= @user.email_address %></p>
 
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-primary btn-hover" %>
+      <% end %>
     </div>
   </div>
 </div>
 
 <h5 class="mb-3">参加中コミュニティ</h5>
 <div class="row">
-  <% Current.user.community_users.where(status: :approved).map(&:community).each do |community| %>
+  <% @user.community_users.where(status: :approved).map(&:community).each do |community| %>
     <div class="col-md-6 col-lg-4 mb-3">
 
       <%= link_to community_path(community), class: "text-decoration-none text-dark" do %>
@@ -46,6 +48,6 @@
 <h5 class="mb-3">いいね一覧</h5>
 
 <br>
-
-<%= link_to "退会する", user_path(Current.user),
-  data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？" }, class: "btn btn-outline-danger btn-hover" %>
+<% if @user == Current.user %>
+  <%= link_to "退会する", user_path(Current.user), data: { turbo_method: :delete, turbo_confirm: "本当に退会しますか？" }, class: "btn btn-outline-danger btn-hover" %>
+<% end %>

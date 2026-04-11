@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @communities = @user.communities
   end
 
   def mypage
@@ -37,6 +38,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
     reset_session
     redirect_to root_path, notice: "退会しました。"
@@ -50,6 +52,6 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find_by_id(params[:id])
-    redirect_to root_path if Current.user != @user
+    redirect_to mypage_path if Current.user != @user
   end
 end

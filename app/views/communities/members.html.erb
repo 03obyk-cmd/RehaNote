@@ -6,7 +6,7 @@
       <% next if cu.rejected? && @community.user != Current.user %>
 
       <div class="col-md-6 col-lg-3 mb-3">
-        <div class="card community-card-nonhover h-100">
+        <%= link_to user_path(cu.user), class: "card community-card h-80 text-decoration-none text-dark" do %>
           <div class="card-body d-flex">
 
             <div class="me-3">
@@ -33,17 +33,17 @@
                 </span>
               </div>
 
-              <% if @community.user == Current.user && cu.pending? %>
-                <div class="d-flex gap-2">
-                  <%= link_to "承認", community_user_path(cu, status: "approved"), data: { turbo_method: :patch }, class: "btn btn-outline-success btn-sm btn-hover" %>
-                  <%= link_to "拒否", community_user_path(cu, status: "rejected"), data: { turbo_method: :patch }, class: "btn btn-outline-danger btn-sm btn-hover" %>
-                </div>
-              <% end %>
-
             </div>
 
           </div>
-        </div>
+        <% end %>
+
+        <% if @community.user == Current.user && cu.pending? %>
+          <div class="mt-2 d-flex gap-2">
+            <%= link_to "承認", community_user_path(cu, status: "approved"), data: { turbo_method: :patch }, class: "btn btn-outline-success btn-sm btn-hover" %>
+            <%= link_to "拒否", community_user_path(cu, status: "rejected"), data: { turbo_method: :patch }, class: "btn btn-outline-danger btn-sm btn-hover" %>
+          </div>
+        <% end %>
       </div>
 
     <% end %>
