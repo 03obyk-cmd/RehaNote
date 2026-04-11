@@ -3,11 +3,13 @@ class PostsController < ApplicationController
 
   def new
     @community = Community.find(params[:community_id])
+    require_community_member!(@community, "コミュニティ未参加のため投稿できません。参加申請してください。")
     @post = Post.new
   end
 
   def create
     community = Community.find(params[:community_id])
+    require_community_member!(@community, "コミュニティ未参加のため投稿できません。参加申請してください。")
     post = community.posts.new(post_params)
     post.user = Current.user
     if post.save
@@ -21,6 +23,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @community = @post.community
+    require_community_member!(@community, "コミュニティ未参加のため閲覧できません。参加後にご利用ください。")
   end
 
   def edit
@@ -44,6 +48,12 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def require_community_member!(community, message)
+    unless community.community_users.exists?(user: Current.user, status: :approved)
+      redirect_to community_path(community), alert: message
+    end
+  end
 
   def correct_user
     @post = Post.find(params[:id])

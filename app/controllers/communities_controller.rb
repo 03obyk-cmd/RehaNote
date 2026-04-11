@@ -25,6 +25,13 @@ class CommunitiesController < ApplicationController
     @community_users = @community.community_users
     @post = Post.new
 
+    unless @community.community_users.exists?(user: Current.user, status: :approved)
+      if params[:keyword].present? || params[:start_position].present?
+        redirect_to community_path(@community), alert: "コミュニティ未参加のため検索できません。参加後にご利用ください。"
+        return
+      end
+    end
+
     @posts = @community.posts
     @posts = @posts.where("title LIKE :q OR exercise_description LIKE :q", q: "%#{params[:keyword]}%") if params[:keyword].present?
     @posts = @posts.where(start_position: params[:start_position]) if params[:start_position].present?
