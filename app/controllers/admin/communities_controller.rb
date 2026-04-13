@@ -4,8 +4,7 @@ class Admin::CommunitiesController < Admin::ApplicationController
   end
 
   def destroy
-    @communities = Community.find(params[:id])
-    @community.destroy
+    Community.find(params[:id]).destroy
     redirect_to admin_communities_path, notice: 'コミュニティを削除しました。'
   end
 end

@@ -3,9 +3,12 @@ class Admin::UsersController < Admin::ApplicationController
     @users = User.all
   end
 
-  def destroy
+  def show
     @user = User.find(params[:id])
-    @user.destroy
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
     redirect_to admin_users_path, notice: 'ユーザーを削除しました。'
   end
 end

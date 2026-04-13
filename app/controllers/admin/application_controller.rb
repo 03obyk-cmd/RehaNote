@@ -5,7 +5,7 @@ class Admin::ApplicationController < ActionController::Base
   private
 
   def after_authentication_url
-    admin_dashboards_path # 管理者用ダッシュボードのパス
+    admin_users_path
   end
 
   def after_logout_url

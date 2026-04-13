@@ -1,0 +1,12 @@
+<div class="container mt-4">
+  <div class="card profile-card mb-4">
+    <div class="card-body text-center">
+
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <h4 class="fw-bold"><%= @user.name %></h4>
+      <p class="text-muted"><%= @user.email_address %></p>
+
+    </div>
+  </div>
+</div>
+<%= link_to "退会させる", admin_user_path(@user), data: { turbo_method: :delete, turbo_confirm: "本当に退会させますか？" }, class: "btn btn-outline-danger btn-hover mt-3" %>

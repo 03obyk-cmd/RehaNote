@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   # 管理者用
   namespace :admin do
-    get "communities/index"
     resource :session, only: [:new, :create, :destroy]
     root 'users#index'
-    resources users, only: [:index, :destroy]
-    resources communities, only: [:index, :destroy]
+    resources :users, only: [:index, :show, :destroy]
+    resources :communities, only: [:index, :destroy]
   end
 
   # エンドユーザー用
