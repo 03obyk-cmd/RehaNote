@@ -1,0 +1,9 @@
+<h1>全コミュニティ一覧</h1>
+<ul>
+  <% @communities.each do |community| %>
+    <li>
+      <%= community.name %> - <%= community.body %>
+      <%= link_to '削除', admin_community_path(community), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
+    </li>
+  <% end %>
+</ul>
