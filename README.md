@@ -20,7 +20,7 @@
 * 記録文をゼロから作成する時
 ​
 ## 設計書
-後ほど作成予定
+https://docs.google.com/spreadsheets/d/16TQa2WIcbUhHl8T-yp6AoTwx9FXtRYjqx0IvpzCBR7s/edit?usp=drive_link
 ​
 ## 開発環境
 - OS：Windows
