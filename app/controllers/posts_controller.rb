@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_community, only: [:create]
 
   def new
     @community = Community.find(params[:community_id])
@@ -48,6 +49,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_community
+    @community = Community.find(params[:community_id])
+  end
 
   def require_community_member!(community, message)
     unless community.community_users.exists?(user: Current.user, status: :approved)
