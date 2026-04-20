@@ -25,6 +25,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @community = @post.community
+    @comments = @post.comments
+    @comment = Comment.new
     require_community_member!(@community, "コミュニティ未参加のため閲覧できません。参加後にご利用ください。")
   end
 

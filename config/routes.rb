@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     get "members", on: :member
   end
 
+  resources :posts, only: [] do
+    resources :comments, only: [:create, :destroy]
+  end
+
   resources :users, path_names: { new: 'sign_up' }
   get "mypage", to: "users#mypage"
 

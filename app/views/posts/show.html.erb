@@ -36,14 +36,14 @@
   <!-- コメント一覧（仮） -->
   <div class="mb-4">
     <h5>コメント</h5>
+    <%= render 'comments/comments', comments: @comments %>
   </div>
 
   <!-- コメントフォーム（仮） -->
   <div class="card">
     <div class="card-body">
       <h6>コメントを書く</h6>
-      <textarea class="form-control mb-2"></textarea>
-      <button class="btn btn-outline-primary">送信</button>
+      <%= render 'comments/form', post: @post, comment: @comment %>
     </div>
   </div>
 
