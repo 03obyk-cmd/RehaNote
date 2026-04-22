@@ -44,11 +44,8 @@
   <% end %>
 </div>
 
-
-<h5 class="mb-3">いいね一覧</h5>
-<% @favorite_posts.each do |post| %>
-  <%= post.title %>
-<% end %>
+<!-- いいね一覧 -->
+<%= render "favorites/list", posts: @favorite_posts %>
 
 <br>
 <% if @user == Current.user %>

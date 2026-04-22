@@ -1,0 +1,9 @@
+<% if @post.favorited_by?(Current.user) %>
+  <%= link_to post_favorite_path(@post), data: { turbo_method: :delete }, class: "btn btn-danger btn-hover" do %>
+    ♥ <%= @post.favorites.count %> いいね
+  <% end %>
+<% else %>
+  <%= link_to post_favorite_path(@post), data: { turbo_method: :post }, class: "btn btn-outline-danger btn-hover" do %>
+    ♡ <%= @post.favorites.count %> いいね
+  <% end %>
+<% end %>

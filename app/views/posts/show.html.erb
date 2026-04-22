@@ -29,9 +29,9 @@
     </div>
   </div>
 
-  <!-- いいね（仮） -->
+  <!-- いいね -->
   <div class="mb-4">
-    <button class="btn btn-outline-danger">♥ いいね</button>
+    <%= render 'favorites/favorites', favorites: @favorites %>
   </div>
 
   <!-- コメント一覧 -->
