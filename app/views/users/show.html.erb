@@ -46,6 +46,9 @@
 
 
 <h5 class="mb-3">いいね一覧</h5>
+<% @favorite_posts.each do |post| %>
+  <%= post.title %>
+<% end %>
 
 <br>
 <% if @user == Current.user %>

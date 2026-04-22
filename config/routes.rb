@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resource :session, only: [:new, :create, :destroy]
     root 'users#index'
     resources :users, only: [:index, :show, :destroy]
-    resources :communities, only: [:index, :destroy]
+    resources :communities, only: [:index, :show, :destroy]
   end
 
   # エンドユーザー用
@@ -16,7 +16,8 @@ Rails.application.routes.draw do
     get "members", on: :member
   end
 
-  resources :posts, only: [] do
+  resources :posts, only: [:show, :new, :create, :edit, :update, :destroy] do
+    resource :favorite, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
 
