@@ -19,10 +19,12 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @communities = @user.communities
+    @favorite_posts = @user.favorite_posts
   end
 
   def mypage
     @user = Current.user
+    @favorite_posts = @user.favorite_posts
     render :show
   end
 
