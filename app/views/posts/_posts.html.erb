@@ -1,0 +1,33 @@
+<% if posts.any? %>
+  <div class="row">
+    <% posts.each do |post| %>
+      <div class="col-md-4 mb-4">
+        <%= link_to community_post_path(@community, post), class: "text-decoration-none text-dark" do %>
+          <div class="card h-100 post-card">
+            <div class="card-body d-flex flex-column">
+
+              <div class="d-flex align-items-center gap-2">
+                <h5 class="card-title"><%= post.title %></h5>
+                <span class="badge bg-secondary mb-2">
+                  <%= I18n.t("enums.post.start_position.#{post.start_position}") %>
+                </span>
+              </div>
+
+              <p class="card-text">
+                <%= truncate(post.exercise_description, length: 50) %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center mt-4">
+    <% if params[:keyword].present? %>
+      <p>該当する投稿がありません</p>
+    <% else %>
+      <p>まだ投稿がありません</p>
+    <% end %>
+  </div>
+<% end %>

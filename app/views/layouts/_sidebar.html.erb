@@ -1,0 +1,38 @@
+<div class="card shadow-sm mt-4">
+  <div class="card-body">
+    <h5 class="fw-bold mb-3">コミュニティ一覧</h5>
+
+    <% @communities.each do |community| %>
+      <%= link_to community_path(community), class: "text-decoration-none text-dark" do %>
+
+        <div class="card mb-3 community-card">
+          <div class="card-body p-3">
+
+            <h6 class="fw-bold mb-1">
+              <%= community.name %>
+            </h6>
+
+            <p class="text-muted small mb-2">
+              <%= community.community_users.approved.count %>人参加中
+            </p>
+
+            <% if Current.user %>
+              <% cu = community.community_users.find_by(user: Current.user) %>
+
+              <% if cu&.approved? %>
+                <span class="badge bg-success">参加中</span>
+              <% elsif cu&.pending? %>
+                <span class="badge bg-warning text-dark">申請中</span>
+              <% else %>
+                <span class="badge bg-secondary">未参加</span>
+              <% end %>
+            <% end %>
+
+          </div>
+        </div>
+
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

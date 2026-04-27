@@ -1,107 +1,26 @@
-<div class="container mt-4">
-
-  <!-- コミュニティ詳細エリア -->
-  <div class="card community-card-nonhover mb-4">
-    <div class="card-body">
-
-      <div class="d-flex align-items-center gap-2">
-        <h3 class="fw-bold mb-3"><%= @community.name %></h3>
-        <% if @community.user == Current.user %>
-          <span class="badge bg-primary">管理者</span>
-        <% end %>
-      </div>
-        
-      <p class="text-muted"><%= @community.body %></p>
-
-    </div>
+<div class="row">
+  <div class="col-md-3">
+    <%= render "layouts/sidebar" %>
   </div>
 
-  <!-- ボタンエリア -->
-  <div class="mb-3">
-    <%= link_to "参加者一覧", members_community_path(@community), class: "btn btn-outline-secondary btn-hover" %>
+  <div class="col-md-9">
+    <div class="container mt-4">
 
-    <% if @community.user == Current.user %>
-      <%= link_to "編集", edit_community_path(@community), class: "btn btn-outline-primary btn-hover" %>
-      <%= link_to "削除", community_path(@community), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-hover" %>
-    <% end %>
+      <!-- コミュニティ詳細エリア -->
+      <%= render "communities/info", community: @community %>
 
-    <% if Current.user && @community.user != Current.user %>
-      <% community_user = @community.community_users.find_by(user: Current.user) %>
-      <% if community_user.nil? %>
-        <%= link_to "参加申請",community_community_users_path(@community), data: { turbo_method: :post }, class: "btn btn-outline-primary btn-hover" %>
+      <!-- 検索エリア -->
+      <%= render "communities/search_posts_form", community: @community %>
 
-        <% elsif community_user.pending? %>
-          承認待ちです。
-
-        <% elsif community_user.approved? %>
-          <%= link_to "退会する", community_community_user_path(@community, community_user), data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-hover" %>
-
-        <% elsif community_user.rejected? %>
-          参加拒否されました。
-
-      <% end %>
-
-    <% end %>
-  </div>
-
-  
-
-  <!-- 検索エリア -->
-  <%= form_with url: community_path(@community), method: :get do |f| %>
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <%= f.search_field :keyword, value: params[:keyword], placeholder: "キーワード検索", class: "form-control me-2" %>
-      </div>
-      <div class="col-md-3">
-        <%= f.select :start_position, options_for_select( Post.start_positions.keys.map { |k| [I18n.t("enums.post.start_position.#{k}"), k] }, params[:start_position] ), { include_blank: "すべての姿勢" }, class: "form-select me-2" %>
-      </div>
-      <div class="col-md-3">
-        <%= f.submit "検索", class: "btn btn-outline-primary btn-hover" %>
-      </div>
-    </div>
-  <% end %>
-
-  <% if params[:keyword].present? %>
-    <p class="mb-3">「<strong><%= params[:keyword] %></strong>」の検索結果</p>
-  <% end %>
-
-  <!-- 投稿エリア -->
-  <h5 class="mb-3">投稿一覧</h5>
-  <% if @posts.any? %>
-    <div class="row">
-      <% @posts.each do |post| %>
-        <div class="col-md-4 mb-4">
-          <%= link_to community_post_path(@community, post), class: "text-decoration-none text-dark" do %>
-            <div class="card h-100 post-card">
-              <div class="card-body d-flex flex-column">
-
-                <div class="d-flex align-items-center gap-2">
-                  <h5 class="card-title"><%= post.title %></h5>
-                  <span class="badge bg-secondary mb-2">
-                    <%= I18n.t("enums.post.start_position.#{post.start_position}") %>
-                  </span>
-                </div>
-
-                <p class="card-text">
-                  <%= truncate(post.exercise_description, length: 50) %>
-                </p>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  
-  <% else %>
-    <div class="text-center mt-4">
       <% if params[:keyword].present? %>
-        <p>該当する投稿がありません</p>
-      <% else %>
-        <p>まだ投稿がありません</p>
+        <p class="mb-3">「<strong><%= params[:keyword] %></strong>」の検索結果</p>
       <% end %>
+
+      <!-- 投稿エリア -->
+      <h5 class="mb-3">投稿一覧</h5>
+      <%= render "posts/posts", posts: @posts %>
+
+      <%= link_to "投稿する", new_community_post_path(@community), class: "btn btn-outline-primary btn-hover" %>
     </div>
-  <% end %>
-
-  <%= link_to "投稿する", new_community_post_path(@community), class: "btn btn-outline-primary btn-hover" %>
-
+  </div>
 </div>

@@ -1,0 +1,26 @@
+<div class="mb-3">
+  <%= link_to "参加者一覧", members_community_path(@community), class: "btn btn-outline-secondary btn-hover" %>
+
+  <% if @community.user == Current.user %>
+    <%= link_to "編集", edit_community_path(@community), class: "btn btn-outline-primary btn-hover" %>
+    <%= link_to "削除", community_path(@community), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-hover" %>
+  <% end %>
+
+  <% if Current.user && @community.user != Current.user %>
+    <% community_user = @community.community_users.find_by(user: Current.user) %>
+    <% if community_user.nil? %>
+      <%= link_to "参加申請",community_community_users_path(@community), data: { turbo_method: :post }, class: "btn btn-outline-primary btn-hover" %>
+
+      <% elsif community_user.pending? %>
+        承認待ちです。
+
+      <% elsif community_user.approved? %>
+        <%= link_to "退会する", community_community_user_path(@community, community_user), data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-hover" %>
+
+      <% elsif community_user.rejected? %>
+        参加拒否されました。
+
+    <% end %>
+
+  <% end %>
+</div>

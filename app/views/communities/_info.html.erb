@@ -1,0 +1,17 @@
+<div class="card community-card-nonhover mb-4">
+  <div class="card-body">
+
+    <div class="d-flex align-items-center gap-2">
+      <h3 class="fw-bold mb-3"><%= community.name %></h3>
+      <% if community.user == Current.user %>
+        <span class="badge bg-primary">管理者</span>
+      <% end %>
+    </div>
+      
+    <p class="text-muted"><%= community.body %></p>
+
+  </div>
+</div>
+
+<!-- ボタンエリア -->
+<%= render "communities/info_buttons", community: community %>
