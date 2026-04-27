@@ -1,44 +1,53 @@
-<div class="container mt-5" style="max-width: 700px;">
-  <div class="card mb-4">
-    <div class="card-body">
+<div class="row">
+  <div class="col-md-3">
+    <%= render "layouts/sidebar" %>
+  </div>
 
-      <div class="d-flex align-items-center gap-2 mb-2">
-        <h3 class="fw-bold mb-0"><%= @post.title %></h3>
+  <div class="col-md-9">
+    <div class="container mt-4" style="max-width: 700px;">
+      
+      <div class="card mb-4">
+        <div class="card-body">
 
-        <span class="badge bg-secondary">
-          <%= I18n.t("enums.post.start_position.#{@post.start_position}") %>
-        </span>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <h3 class="fw-bold mb-0"><%= @post.title %></h3>
+
+            <span class="badge bg-secondary">
+              <%= I18n.t("enums.post.start_position.#{@post.start_position}") %>
+            </span>
+          </div>
+
+          <div class="text-muted small mb-3">
+            投稿者：<%= @post.user.name %>　
+            <%= l @post.created_at, format: :long %>
+          </div>
+
+          <%= simple_format(@post.exercise_description) %>
+
+          <hr>
+          <h6>記録文例</h6>
+          <p class="text-muted"><%= simple_format(@post.record_example) %></p>
+
+          <% if @post.user == Current.user %>
+            <%= link_to "編集", edit_community_post_path(@post.community, @post), class: "btn btn-outline-primary btn-sm btn-hover" %>
+            <%= link_to "削除", community_post_path(@post.community, @post), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "btn btn-outline-danger btn-sm btn-hover" %>
+          <% end %>
+
+        </div>
       </div>
 
-      <div class="text-muted small mb-3">
-        投稿者：<%= @post.user.name %>　
-        <%= l @post.created_at, format: :long %>
+      <!-- いいね -->
+      <div class="mb-4">
+        <%= render 'favorites/favorite_buttons', favorites: @favorites %>
       </div>
 
-      <%= simple_format(@post.exercise_description) %>
+      <!-- コメント一覧 -->
+      <%= render 'comments/comments', comments: @comments %>
 
-      <hr>
-      <h6>記録文例</h6>
-      <p class="text-muted"><%= simple_format(@post.record_example) %></p>
-
-      <% if @post.user == Current.user %>
-        <%= link_to "編集", edit_community_post_path(@post.community, @post), class: "btn btn-outline-primary btn-sm btn-hover" %>
-        <%= link_to "削除", community_post_path(@post.community, @post), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "btn btn-outline-danger btn-sm btn-hover" %>
-      <% end %>
+      <!-- コメントフォーム -->
+      <%= render 'comments/form', post: @post, comment: @comment %>
 
     </div>
   </div>
-
-  <!-- いいね -->
-  <div class="mb-4">
-    <%= render 'favorites/favorites', favorites: @favorites %>
-  </div>
-
-  <!-- コメント一覧 -->
-  <%= render 'comments/comments', comments: @comments %>
-
-  <!-- コメントフォーム -->
-  <%= render 'comments/form', post: @post, comment: @comment %>
-
 
 </div>

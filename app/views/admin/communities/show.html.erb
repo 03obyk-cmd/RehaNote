@@ -1,0 +1,12 @@
+<div class="card community-card-nonhover my-4">
+  <div class="card-body">
+    <h3 class="fw-bold mb-3"><%= @community.name %></h3>    
+    <p class="text-muted"><%= @community.body %></p>
+  </div>
+</div>
+
+<!-- 投稿エリア -->
+<h5 class="mb-3">投稿一覧</h5>
+<%= render "admin/communities/posts_list", posts: @posts %>
+
+<%= link_to "削除する", admin_community_path(@community), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger btn-hover my-3" %>

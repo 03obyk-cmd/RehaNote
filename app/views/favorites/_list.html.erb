@@ -3,7 +3,7 @@
 <% if posts.any? %>
   <div class="row">
     <% posts.each do |post| %>
-      <div class="col-md-6 col-lg-4 mb-3">
+      <div class="col-md-6 col-lg-4">
         <%= link_to post_path(post), class: "text-decoration-none text-dark" do %>
           <div class="card h-100 post-card">
             <div class="card-body">

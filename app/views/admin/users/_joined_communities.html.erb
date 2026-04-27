@@ -1,0 +1,20 @@
+<h5 class="mb-3">参加中コミュニティ</h5>
+
+<div class="row">
+  <% @user.community_users.where(status: :approved).map(&:community).each do |community| %>
+    <div class="col-md-6 col-lg-4 mb-3">
+
+      <div class="card community-card-nonhover h-100">
+        <div class="card-body">
+          <h6 class="fw-bold"><%= community.name %></h6>
+
+          <p class="text-muted small">
+            <%= community.body %>
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+</div>

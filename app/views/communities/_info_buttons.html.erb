@@ -12,13 +12,13 @@
       <%= link_to "参加申請",community_community_users_path(@community), data: { turbo_method: :post }, class: "btn btn-outline-primary btn-hover" %>
 
       <% elsif community_user.pending? %>
-        承認待ちです。
+        承認待ちです
 
       <% elsif community_user.approved? %>
         <%= link_to "退会する", community_community_user_path(@community, community_user), data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-hover" %>
 
       <% elsif community_user.rejected? %>
-        参加拒否されました。
+        参加拒否されました
 
     <% end %>
 

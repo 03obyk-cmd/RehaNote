@@ -9,4 +9,11 @@
     </div>
   </div>
 </div>
-<%= link_to "退会させる", admin_user_path(@user), data: { turbo_method: :delete, turbo_confirm: "本当に退会させますか？" }, class: "btn btn-outline-danger btn-hover mt-3" %>
+
+<!-- 参加中コミュニティ一覧 -->
+<%= render "admin/users/joined_communities", user: @user %>
+
+<!-- いいね一覧 -->
+<%= render "admin/users/favorites_list", posts: @favorite_posts %>
+
+<%= link_to "退会させる", admin_user_path(@user), data: { turbo_method: :delete, turbo_confirm: "本当に退会させますか？" }, class: "btn btn-outline-danger btn-hover my-3" %>

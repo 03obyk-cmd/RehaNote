@@ -1,0 +1,14 @@
+<div class="card profile-card mb-4">
+  <div class="card-body text-center">
+
+    <%= image_tag @user.get_profile_image(100,100) %>
+
+    <h4 class="fw-bold"><%= user.name %></h4>
+
+    <% if @user == Current.user %>
+      <p class="text-muted"><%= user.email_address %></p>
+
+      <%= link_to "編集", edit_user_path(user), class: "btn btn-outline-primary btn-hover" %>
+    <% end %>
+  </div>
+</div>

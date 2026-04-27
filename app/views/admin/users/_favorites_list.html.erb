@@ -1,0 +1,22 @@
+<h5 class="mb-3">いいね一覧</h5>
+
+<% if posts.any? %>
+  <div class="row">
+    <% posts.each do |post| %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 post-card-nonhover">
+          <div class="card-body">
+            <h6 class="fw-bold"><%= post.title %></h6>
+            <p class="small text-muted">
+              <%= truncate(post.exercise_description, length: 50) %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center text-muted py-4">
+    まだいいねした投稿はありません
+  </div>
+<% end %>
