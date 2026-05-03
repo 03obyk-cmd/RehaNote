@@ -57,6 +57,7 @@
 
 .post-card {
   transition: 0.3s;
+  height: 100%;
 }
 
 .post-card:hover {

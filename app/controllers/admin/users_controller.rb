@@ -10,6 +10,6 @@ class Admin::UsersController < Admin::ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    redirect_to admin_users_path, notice: 'ユーザーを削除しました。'
+    redirect_to admin_users_path, notice: 'ユーザーを削除しました'
   end
 end

@@ -27,7 +27,7 @@ class CommunitiesController < ApplicationController
 
     unless @community.community_users.exists?(user: Current.user, status: :approved)
       if params[:keyword].present? || params[:start_position].present?
-        redirect_to community_path(@community), alert: "コミュニティ未参加のため検索できません。参加後にご利用ください。"
+        redirect_to community_path(@community), alert: "コミュニティ未参加のため検索できません"
         return
       end
     end
@@ -53,7 +53,7 @@ class CommunitiesController < ApplicationController
   def destroy
     @community = Community.find(params[:id])
     @community.destroy
-    redirect_to communities_path,  notice: "削除しました。"
+    redirect_to communities_path,  notice: "削除しました"
   end
 
   def members

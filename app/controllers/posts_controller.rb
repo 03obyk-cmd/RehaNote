@@ -4,17 +4,17 @@ class PostsController < ApplicationController
 
   def new
     @community = Community.find(params[:community_id])
-    require_community_member!(@community, "コミュニティ未参加のため投稿できません。参加申請してください。")
+    require_community_member!(@community, "コミュニティ未参加のため投稿できません")
     @post = Post.new
   end
 
   def create
     community = Community.find(params[:community_id])
-    require_community_member!(@community, "コミュニティ未参加のため投稿できません。参加申請してください。")
+    require_community_member!(@community, "コミュニティ未参加のため投稿できません")
     post = community.posts.new(post_params)
     post.user = Current.user
     if post.save
-      redirect_to community_path(community), notice: "投稿が完了しました。"
+      redirect_to community_path(community), notice: "投稿が完了しました"
     else
       @community = community
       @post = post
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     @community = @post.community
     @comments = @post.comments
     @comment = Comment.new
-    require_community_member!(@community, "コミュニティ未参加のため閲覧できません。参加後にご利用ください。")
+    require_community_member!(@community, "コミュニティ未参加のため閲覧できません")
   end
 
   def edit
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @community = @post.community
     if @post.update(post_params)
-      redirect_to community_post_path(@post.community), notice: "更新しました。"
+      redirect_to community_post_path(@post.community), notice: "更新しました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
 
   def destroy
     Post.find(params[:id]).destroy
-    redirect_to community_path(params[:community_id]), notice: "投稿を削除しました。"
+    redirect_to community_path(params[:community_id]), notice: "投稿を削除しました"
   end
 
   private
